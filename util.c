@@ -14,7 +14,7 @@ emsg(char *m)
 void
 quit()
 {
-	emsg("jellowm exit");
+	emsg("9jwm exit");
 	r = 0;
 }
 

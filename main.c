@@ -51,6 +51,13 @@ usage()
 }
 
 void
+version()
+{
+    fprintf(stderr, "%s %s\n", WM_NAME, WM_VERSION);
+    exit(1);
+}
+
+void
 setwallpaper(char *w)
 {
    char str[512];
@@ -221,7 +228,7 @@ main (int argc, char **argv)
     while ((opt = getopt(argc, argv, "w:vh")) != -1) {
 	switch(opt) {
 		case 'v':
-			fprintf(stderr, "%s %s\n", WM_NAME, WM_VERSION);
+			version();
 			break;
 		case 'h':
 			usage();
