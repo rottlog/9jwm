@@ -22,6 +22,7 @@ struct key {
 };
 
 static void usage();
+static void version();
 static void setwallpaper(char *w);
 static void checkforanotherwm();
 
