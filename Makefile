@@ -1,4 +1,4 @@
-PREFIX = /usr/local
+PREFIX ?= /usr/local
 
 CFLAGS = -std=c11 -Wall -Wextra
 LDFLAGS = -lxcb -lxcb-keysyms -lxcb-cursor
@@ -11,7 +11,7 @@ all: 9jwm
 9jwm: $(OBJ)
 			$(CC) -o 9jwm $(OBJ) $(LDFLAGS)
 
-$(OBG): $(SRC)
+$(OBJ): $(SRC)
 			$(CC) -c $(SRC) -o $(OBJ)
 
 clean:
