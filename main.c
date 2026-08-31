@@ -7,7 +7,8 @@
 #include <xcb/xcb_keysyms.h>
 #include <xcb/xcb.h>
 
-#define arrlength(A)	(sizeof(A)/sizeof(*A))
+#include "util.h"
+#include "cursor.h"
 
 typedef union {
     const char** n;

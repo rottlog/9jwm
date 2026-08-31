@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <unistd.h>
 
-int r; // check if running
+#include "util.h"
 
 void
 emsg(char *m)
