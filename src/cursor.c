@@ -10,8 +10,6 @@ static const uint8_t arrow[] = {
 	0x9e, 0x0f, 0x9f, 0x1f, 0xbf, 0xbf, 0xff, 0xff
 };
 
-static xcb_cursor_t cursor;
-
 xcb_pixmap_t
 curpixmap(xcb_screen_t *s, xcb_connection_t *dpy, int isrc)
 {
@@ -49,19 +47,19 @@ curpixmap(xcb_screen_t *s, xcb_connection_t *dpy, int isrc)
 }
 
 void
-loadcursor(xcb_screen_t *s, xcb_connection_t *dpy)
+loadcursor(xcb_screen_t *s, xcb_connection_t *dpy, xcb_cursor_t cur)
 {
 	xcb_pixmap_t src_pixmap = curpixmap(s, dpy, 1);
 	xcb_pixmap_t mask_pixmap = curpixmap(s, dpy, 0);
 
-	cursor = xcb_generate_id(dpy);
-	xcb_create_cursor(dpy, cursor, src_pixmap, mask_pixmap, 0, 0, 0, 0x0000, 0x0000, 0x0000, 0, 0);
+	cur = xcb_generate_id(dpy);
+	xcb_create_cursor(dpy, cur, src_pixmap, mask_pixmap, 0, 0, 0, 0x0000, 0x0000, 0x0000, 0, 0);
 	
-	uint32_t values[] = {cursor};
-    xcb_change_window_attributes(dpy, s->root, XCB_CW_CURSOR, values);
+	uint32_t values[] = {cur};
+    	xcb_change_window_attributes(dpy, s->root, XCB_CW_CURSOR, values);
    
-    xcb_flush(dpy);
+    	xcb_flush(dpy);
 
-    xcb_free_pixmap(dpy, src_pixmap);
-    xcb_free_pixmap(dpy, mask_pixmap);
+    	xcb_free_pixmap(dpy, src_pixmap);
+    	xcb_free_pixmap(dpy, mask_pixmap);
 }

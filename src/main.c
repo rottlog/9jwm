@@ -10,10 +10,8 @@
 #include "util.h"
 #include "cursor.h"
 
-typedef union {
-    const char** n;
-    const int i;
-} Arg;
+#define WM_NAME "9jwm"
+#define WM_VERSION "0.1"
 
 struct key {
     unsigned int mod;
@@ -23,7 +21,6 @@ struct key {
 };
 
 static void usage();
-static void version();
 static void setwallpaper(char *w);
 static void checkforanotherwm();
 
@@ -41,6 +38,9 @@ static int wl, s_height, s_width;
 static xcb_key_symbols_t *syms;
 static uint32_t values[4];
 
+static int r = 1;
+
+static xcb_cursor_t cur;
 static xcb_connection_t *dpy;
 static xcb_screen_t *s;
 static xcb_drawable_t win;
@@ -49,13 +49,6 @@ void
 usage()
 {
     fprintf(stderr, "usage: %s [-h] [-v] [-w wallpaper]\n", WM_NAME);
-    exit(1);
-}
-
-void
-version()
-{
-    fprintf(stderr, "%s %s\n", WM_NAME, WM_VERSION);
     exit(1);
 }
 
@@ -130,7 +123,7 @@ buttonpress(xcb_generic_event_t *ev)
 	
 	xcb_grab_pointer(dpy, 0, root, XCB_EVENT_MASK_BUTTON_RELEASE
 	               | XCB_EVENT_MASK_BUTTON_MOTION | XCB_EVENT_MASK_POINTER_MOTION_HINT, 
-	               XCB_GRAB_MODE_ASYNC, XCB_GRAB_MODE_ASYNC, root, cursor, XCB_CURRENT_TIME);
+	               XCB_GRAB_MODE_ASYNC, XCB_GRAB_MODE_ASYNC, root, cur, XCB_CURRENT_TIME);
 	xcb_flush(dpy);
 	free(g);
 }
@@ -230,7 +223,7 @@ main (int argc, char **argv)
     while ((opt = getopt(argc, argv, "w:vh")) != -1) {
 	switch(opt) {
 		case 'v':
-			version();
+			emsg(WM_VERSION);
 			break;
 		case 'h':
 			usage();
@@ -256,22 +249,20 @@ main (int argc, char **argv)
     s_height = s->height_in_pixels;
     s_width = s->width_in_pixels;
 
-    r = 1;
-
     if (wl != 0) {
-		setwallpaper(w);	
+	setwallpaper(w);	
     } else {
     	system("xsetroot -solid grey30");
     }
 
-    loadcursor(s, dpy);
+    loadcursor(s, dpy, cur);
     setupkeys(); 
 
     xcb_flush(dpy);
 	
     run();
 
-    xcb_free_cursor(dpy, cursor);
+    xcb_free_cursor(dpy, cur);
     xcb_disconnect(dpy);
     return 0;
 }

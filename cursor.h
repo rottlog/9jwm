@@ -1,1 +1,0 @@
-void loadcursor(xcb_screen_t *s, xcb_connection_t *dpy);

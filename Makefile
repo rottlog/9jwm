@@ -1,21 +1,27 @@
 PREFIX ?= /usr/local
 
-CFLAGS = -std=c11 -Wall -Wextra
+CFLAGS += -std=c11 -Wall -Wextra
 LDFLAGS = -lxcb -lxcb-keysyms -lxcb-cursor
 
-SRC = main.c
-OBJ = main.o
+SRCDIR = src
+WRKDIR = wrk
+
+SRC = $(wildcard $(SRCDIR)/*.c)
+OBJ = ${patsubst $(SRCDIR)/%.c, $(WRKDIR)/%.o, $(SRC)}
 
 all: 9jwm
 
-9jwm: $(OBJ)
-			$(CC) -o 9jwm $(OBJ) $(LDFLAGS)
+$(WRKDIR)/%.o: $(SRCDIR)/%.c | $(WRKDIR)
+	$(CC) -c $(CFLAGS) $< -o $@
 
-$(OBJ): $(SRC)
-			$(CC) -c $(SRC) -o $(OBJ)
+$(WRKDIR):
+	mkdir -p $(WRKDIR)
+
+9jwm: $(OBJ)
+	$(CC) -o $@ $(OBJ) $(LDFLAGS)
 
 clean:
-	rm -f 9jwm $(OBJ)
+	rm -rf $(WRKDIR) 9jwm
 
 install:
 	mkdir -p $(DESTDIR)$(PREFIX)/bin
