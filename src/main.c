@@ -13,6 +13,8 @@
 #define WM_NAME "9jwm"
 #define WM_VERSION "0.1"
 
+#define ROOT_EVENT_MASK (XCB_EVENT_MASK_BUTTON_PRESS | XCB_EVENT_MASK_SUBSTRUCTURE_NOTIFY | XCB_EVENT_MASK_STRUCTURE_NOTIFY | XCB_EVENT_MASK_FOCUS_CHANGE)
+
 struct key {
     unsigned int mod;
     xcb_keysym_t keysym;
