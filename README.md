@@ -4,18 +4,7 @@ A Minimal WM.
 
 ## Usage
 
-Drag Win = `Super Key` + `Left Mouse Click`
-
-Delete Win = `Super Key` + `Middle Mouse Click`
-
-Resize Win = `Super Key` + `Right Mouse Click`
-
-
-Open Terminal = `Super Key` + `Return`
-
-Open Dmenu = `Super Key` + `D`
-
-Open Browser = `Super Key` + `B`
+    usage: 9jwm [-h] [-v] [-w wallpaper]
 
 ## Building
 
@@ -27,8 +16,7 @@ Dependencies:
 
 Build by running:
 
-    make all
-    sudo make install
+    make
 
 ## License
 
