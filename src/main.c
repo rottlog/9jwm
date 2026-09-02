@@ -57,9 +57,13 @@ usage()
 void
 setwallpaper(char *w)
 {
-   char str[512];
-   snprintf(str, sizeof(str), "feh --bg-scale %s &", w);
+   size_t strl = strlen(w) + 24;
+   char *str = malloc(strl);
+	
+   snprintf(str, strl, "feh --bg-scale %s &", w);
    system(str);
+
+   free(str);
 }
 
 void
