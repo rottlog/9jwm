@@ -14,6 +14,8 @@ Dependencies:
 - xcb-cursor
 - xcb-keysyms
 
+- feh (optional, required for -w)
+
 Build by running:
 
     make
