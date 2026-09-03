@@ -35,12 +35,10 @@ static void run();
 
 #include "config.h"
 
-static int wl, s_height, s_width;
-
 static xcb_key_symbols_t *syms;
 static uint32_t values[4];
 
-static int r = 1;
+static int wl, r = 1;
 
 static xcb_cursor_t cur;
 static xcb_connection_t *dpy;
@@ -251,9 +249,6 @@ main (int argc, char **argv)
     if (s == NULL) emsg("cannot find screen");
     
     checkforanotherwm();
-
-    s_height = s->height_in_pixels;
-    s_width = s->width_in_pixels;
 
     if (wl != 0) {
 	setwallpaper(w);	
