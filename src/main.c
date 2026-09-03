@@ -94,7 +94,7 @@ buttonpress(xcb_generic_event_t *ev)
 {
 	xcb_drawable_t root;
 
-    	xcb_get_geometry_reply_t *g;  
+    xcb_get_geometry_reply_t *g;  
 	xcb_button_press_event_t *e = ( xcb_button_press_event_t *) ev;
 
 	root = s->root;
@@ -148,17 +148,17 @@ motionnotify()
 	    	values[0] = p->root_x - g->width / 2;
 	    	values[1] = p->root_y - g->height / 2;
 	    	xcb_configure_window(dpy, win, XCB_CONFIG_WINDOW_X | XCB_CONFIG_WINDOW_Y, values);
-		xcb_flush(dpy);
-		free(g);
-		break;
+			xcb_flush(dpy);
+			free(g);
+			break;
 	    case 3: 
-	  	g = xcb_get_geometry_reply(dpy, xcb_get_geometry(dpy, win), NULL);
-		values[0] = p->root_x - g->x;
+	  		g = xcb_get_geometry_reply(dpy, xcb_get_geometry(dpy, win), NULL);
+			values[0] = p->root_x - g->x;
 	    	values[1] = p->root_y - g->y;
 	    	xcb_configure_window(dpy, win, XCB_CONFIG_WINDOW_WIDTH | XCB_CONFIG_WINDOW_HEIGHT, values);
 	    	xcb_flush(dpy);
-		free(g);
-		break;
+			free(g);
+			break;
 	}
 }
 
@@ -251,7 +251,7 @@ main (int argc, char **argv)
     checkforanotherwm();
 
     if (wl != 0) {
-	setwallpaper(w);	
+		setwallpaper(w);	
     } else {
     	system("xsetroot -solid grey30");
     }
