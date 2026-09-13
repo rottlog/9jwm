@@ -249,12 +249,8 @@ main (int argc, char **argv)
     if (s == NULL) emsg("cannot find screen");
     
     checkforanotherwm();
-
-    if (wl != 0) {
-		setwallpaper(w);	
-    } else {
-    	system("xsetroot -solid grey30");
-    }
+	
+	wl ? setwallpaper(w) : system("xsetroot -solid grey30");
 
     loadcursor(s, dpy, cur);
     setupkeys(); 
